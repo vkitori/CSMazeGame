@@ -11,14 +11,43 @@ namespace CSMazeGame
         static void Main(string[] args)
         {
             char[,] map = new char[15, 30];
-            int userX = 1, userY = 1;
+            int userX = 15, userY = 6;
             Console.CursorVisible = false;
 
             while (true) {
                 DrowMap();
                 Console.SetCursorPosition(userX, userY);
                 Console.Write('#');
-                Console.ReadKey();
+                ConsoleKeyInfo charKey = Console.ReadKey();
+
+                switch (charKey.Key) 
+                {
+                    case ConsoleKey.DownArrow:
+                        if (map[userX +1, userY] != '#' && map[userX + 1, userY] != '^')
+                        {
+                            userX++;
+                        }
+                        break;
+                    case ConsoleKey.UpArrow:
+                        if (map[userX - 1, userY] != '#' && map[userX - 1, userY] != '^')
+                        {
+                            userX--;
+                        }
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (map[userX, userY + 1] != '#' && map[userX , userY + 1] != '^')
+                        {
+                            userY++;
+                        }
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (map[userX, userY - 1] != '#' && map[userX, userY - 1] != '^')
+                        {
+                            userY--;
+                        }
+                        break;
+                }
+
                 Console.Clear();
             }
 
