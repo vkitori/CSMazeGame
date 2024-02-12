@@ -1,0 +1,7 @@
+D:\Study\Programming\c#\CSMazeGame\bin\Debug\CSMazeGame.exe.config
+D:\Study\Programming\c#\CSMazeGame\bin\Debug\CSMazeGame.exe
+D:\Study\Programming\c#\CSMazeGame\bin\Debug\CSMazeGame.pdb
+D:\Study\Programming\c#\CSMazeGame\obj\Debug\CSMazeGame.csproj.AssemblyReference.cache
+D:\Study\Programming\c#\CSMazeGame\obj\Debug\CSMazeGame.csproj.CoreCompileInputs.cache
+D:\Study\Programming\c#\CSMazeGame\obj\Debug\CSMazeGame.exe
+D:\Study\Programming\c#\CSMazeGame\obj\Debug\CSMazeGame.pdb
