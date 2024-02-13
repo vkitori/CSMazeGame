@@ -13,18 +13,24 @@ namespace CSMazeGame
         {
             char[,] map = new char[15, 30];
             int userX = 6, userY = 15;
+            List<char> bag = new List<char>();
+            Random rand = new Random();
+            int x = rand.Next(0,15);
+            bool mapDrowed = false;
+
             Console.CursorVisible = false;
 
             while (true) {
                 DrowMap();
-                Console.SetCursorPosition(userY, userX);
-                Console.Write('#');
-                KeyMove();
+                ShowBag();
+                KeyMove();               
                 Console.Clear();
             }
 
             void KeyMove()
             {
+                Console.SetCursorPosition(userY, userX);
+                Console.Write('#');
                 ConsoleKeyInfo charKey = Console.ReadKey();
                 switch (charKey.Key)
                 {
@@ -53,6 +59,23 @@ namespace CSMazeGame
                         }
                         break;
                 }
+                if (map[userX,userY] == '?')
+                {
+                    
+                    map[userX, userY] = 'x';
+                    bag.Add('?');
+                    Console.Write(map[userX, userY]);
+                }
+            }
+
+            void ShowBag()
+            {
+                Console.SetCursorPosition(40, 0);
+                Console.Write("In your bag you have: ");
+                foreach (char c in bag)
+                {
+                    Console.Write(c + " ");
+                }
             }
 
             void DrowMap() 
@@ -68,16 +91,21 @@ namespace CSMazeGame
                         else if (i == 5 && j > 10 || i == 8 && j <= 20 || i == 11 && j > 5 || i < 5 && j == 5 || i < 4 && j == 23)
                         {
                             map[i, j] = '^';
+                        }                        
+                        //need to figure out new algoritm for this
+                        else if (!mapDrowed && (j == 7 + x && i == x || i == x && j == x || j == x+6 && i == 1 + x))
+                        {
+                            map[i, j] = '?';
                         }
                         else
                         {
                             map[i, j] = ' ';
-                        }
-
+                        }                       
                         Console.Write(map[i, j]);
                     }
                     Console.WriteLine();
                 }
+                mapDrowed = true;
             }
         }
     }
