@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,44 +12,47 @@ namespace CSMazeGame
         static void Main(string[] args)
         {
             char[,] map = new char[15, 30];
-            int userX = 15, userY = 6;
+            int userX = 6, userY = 15;
             Console.CursorVisible = false;
 
             while (true) {
                 DrowMap();
-                Console.SetCursorPosition(userX, userY);
+                Console.SetCursorPosition(userY, userX);
                 Console.Write('#');
-                ConsoleKeyInfo charKey = Console.ReadKey();
+                KeyMove();
+                Console.Clear();
+            }
 
-                switch (charKey.Key) 
+            void KeyMove()
+            {
+                ConsoleKeyInfo charKey = Console.ReadKey();
+                switch (charKey.Key)
                 {
                     case ConsoleKey.DownArrow:
-                        if (map[userX +1, userY] != '#' && map[userX + 1, userY] != '^')
+                        if (map[userX + 1, userY] != '*' && map[userX + 1, userY] != '^')
                         {
                             userX++;
                         }
                         break;
                     case ConsoleKey.UpArrow:
-                        if (map[userX - 1, userY] != '#' && map[userX - 1, userY] != '^')
+                        if (map[userX - 1, userY] != '*' && map[userX - 1, userY] != '^')
                         {
                             userX--;
                         }
                         break;
                     case ConsoleKey.LeftArrow:
-                        if (map[userX, userY + 1] != '#' && map[userX , userY + 1] != '^')
-                        {
-                            userY++;
-                        }
-                        break;
-                    case ConsoleKey.RightArrow:
-                        if (map[userX, userY - 1] != '#' && map[userX, userY - 1] != '^')
+                        if (map[userX, userY - 1] != '*' && map[userX, userY - 1] != '^')
                         {
                             userY--;
                         }
                         break;
+                    case ConsoleKey.RightArrow:
+                        if (map[userX, userY + 1] != '*' && map[userX, userY + 1] != '^')
+                        {
+                            userY++;
+                        }
+                        break;
                 }
-
-                Console.Clear();
             }
 
             void DrowMap() 
