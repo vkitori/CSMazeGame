@@ -15,8 +15,7 @@ namespace CSMazeGame
             int userX = 6, userY = 15;
             List<char> bag = new List<char>();
             Random rand = new Random();
-            int x = rand.Next(0,15);
-                        
+                                    
             Console.CursorVisible = false;
             InizializeMap();
             
@@ -93,18 +92,26 @@ namespace CSMazeGame
                         {
                             map[i, j] = '^';
                         }
-                        //need to figure out new algoritm for this
-                        //else if (j == 7 + x && i == x || i == x && j == x || j == x+6 && i == 1 + x)
-                        // {
-                        //    map[i, j] = '?';
-                        //}
                         else
                         {
                             map[i, j] = ' ';
                         }
                         map[10, 5] = '?';
                     }
-                }                
+                }
+                // Randomly place '?'
+                int questionMarksCount = rand.Next(5, 10);
+                for (int i = 0; i < questionMarksCount; i++)
+                {
+                    int x = rand.Next(1, map.GetLength(0) - 1);
+                    int y = rand.Next(1, map.GetLength(1) - 1);
+                    while (map[x, y] != ' ')
+                    {
+                        x = rand.Next(1, map.GetLength(0) - 1);
+                        y = rand.Next(1, map.GetLength(1) - 1);
+                    }
+                    map[x, y] = '?';
+                }
             }
 
             void DrowMap() 
