@@ -16,10 +16,10 @@ namespace CSMazeGame
             List<char> bag = new List<char>();
             Random rand = new Random();
             int x = rand.Next(0,15);
-            bool mapDrowed = false;
-
+                        
             Console.CursorVisible = false;
-
+            InizializeMap();
+            
             while (true) {
                 DrowMap();
                 ShowBag();
@@ -32,6 +32,7 @@ namespace CSMazeGame
                 Console.SetCursorPosition(userY, userX);
                 Console.Write('#');
                 ConsoleKeyInfo charKey = Console.ReadKey();
+                
                 switch (charKey.Key)
                 {
                     case ConsoleKey.DownArrow:
@@ -59,12 +60,11 @@ namespace CSMazeGame
                         }
                         break;
                 }
+
                 if (map[userX,userY] == '?')
                 {
-                    
                     map[userX, userY] = 'x';
-                    bag.Add('?');
-                    Console.Write(map[userX, userY]);
+                    bag.Add('?');                   
                 }
             }
 
@@ -78,8 +78,9 @@ namespace CSMazeGame
                 }
             }
 
-            void DrowMap() 
+            void InizializeMap()
             {
+                Console.SetCursorPosition(0, 0);
                 for (int i = 0; i < map.GetLength(0); i++)
                 {
                     for (int j = 0; j < map.GetLength(1); j++)
@@ -91,21 +92,31 @@ namespace CSMazeGame
                         else if (i == 5 && j > 10 || i == 8 && j <= 20 || i == 11 && j > 5 || i < 5 && j == 5 || i < 4 && j == 23)
                         {
                             map[i, j] = '^';
-                        }                        
-                        //need to figure out new algoritm for this
-                        else if (!mapDrowed && (j == 7 + x && i == x || i == x && j == x || j == x+6 && i == 1 + x))
-                        {
-                            map[i, j] = '?';
                         }
+                        //need to figure out new algoritm for this
+                        //else if (j == 7 + x && i == x || i == x && j == x || j == x+6 && i == 1 + x)
+                        // {
+                        //    map[i, j] = '?';
+                        //}
                         else
                         {
                             map[i, j] = ' ';
-                        }                       
+                        }
+                        map[10, 5] = '?';
+                    }
+                }                
+            }
+
+            void DrowMap() 
+            {
+                for (int i = 0; i < map.GetLength(0); i++)
+                {
+                    for (int j = 0; j < map.GetLength(1); j++)
+                    {
                         Console.Write(map[i, j]);
                     }
                     Console.WriteLine();
                 }
-                mapDrowed = true;
             }
         }
     }
