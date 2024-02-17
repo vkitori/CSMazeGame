@@ -15,7 +15,8 @@ namespace CSMazeGame
             int userX = 6, userY = 15;
             List<char> bag = new List<char>();
             Random rand = new Random();
-                                    
+            int questionMarksCount = rand.Next(5, 10);
+
             Console.CursorVisible = false;
             InizializeMap();
             
@@ -75,6 +76,8 @@ namespace CSMazeGame
                 {
                     Console.Write(c + " ");
                 }
+
+                DrawBar(bag.Count, questionMarksCount);
             }
 
             void InizializeMap()
@@ -100,7 +103,7 @@ namespace CSMazeGame
                     }
                 }
                 // Randomly place '?'
-                int questionMarksCount = rand.Next(5, 10);
+               
                 for (int i = 0; i < questionMarksCount; i++)
                 {
                     int x = rand.Next(1, map.GetLength(0) - 1);
@@ -124,6 +127,33 @@ namespace CSMazeGame
                     }
                     Console.WriteLine();
                 }
+            }
+
+            void DrawBar (int currentValue, int maxValue, ConsoleColor color = ConsoleColor.Green) 
+                {
+                ConsoleColor defoultColor = Console.BackgroundColor;
+                string bar = "";
+                
+                for (int i = 0; i< currentValue; i++)
+                {
+                    bar += " ";
+                }
+
+                Console.SetCursorPosition(40, 2);
+                Console.Write("[");
+                Console.BackgroundColor = color;
+                Console.Write(bar);
+
+                Console.BackgroundColor = defoultColor;
+                
+                bar = "";
+                for (int i = currentValue; i < maxValue; i++)
+                {
+                    bar += " ";
+                }
+                Console.Write(bar);
+                Console.Write("]");
+                Console.Write(currentValue + "/" + maxValue);
             }
         }
     }
